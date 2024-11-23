@@ -1,0 +1,9 @@
+
+bin/Debug/SDL-Library.exe
+bin/Debug/SDL2.dll
+bin/Debug/SDL2_image.dll
+Window.vim
+SDL-Library.depend
+obj/Debug/main.o
+obj/Debug/src/Init.o
+obj/Debug/src/Window.o

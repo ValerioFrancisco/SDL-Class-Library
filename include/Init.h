@@ -3,13 +3,17 @@
 
 namespace lp {
 
-	// Takes care of all basic SDL Initializations
+	// Takes care of all basic SDL Initializations and closes
+	// SDL when going out of scope
 	class Init
 	{
 		public:
 
 			// Initializes video only
 			Init();
+
+			// Initializes according to the flags passed
+			Init(Uint32 flags);
 
 			// Does all the cleanup
 			virtual ~Init();
