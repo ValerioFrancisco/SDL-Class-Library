@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -31,8 +33,21 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="include" />
+			<Add directory="D:/cpp/SDL2-2.30.9/i686-w64-mingw32/include/SDL2" />
+			<Add directory="D:/cpp/SDL2_image-2.8.2/i686-w64-mingw32/include/SDL2" />
 		</Compiler>
+		<Linker>
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
+			<Add directory="src" />
+			<Add directory="D:/cpp/SDL2-2.30.9/i686-w64-mingw32/lib" />
+			<Add directory="D:/cpp/SDL2_image-2.8.2/i686-w64-mingw32/lib" />
+		</Linker>
+		<Unit filename="include/Init.h" />
+		<Unit filename="include/Window.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Init.cpp" />
+		<Unit filename="src/Window.cpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>
