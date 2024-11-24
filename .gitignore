@@ -11,3 +11,11 @@ SDL-Library.cbp
 SDL-Library.cbp
 SDL-Library.layout
 SDL-Library.cbp
+/media
+src/.Surface.cpp.swp
+src/.Window.cpp.swp
+include/.Surface.h.swp
+include/.Window.h.swp
+obj/Debug/src/Surface.o
+.main.cpp.swp
+Surface.vim

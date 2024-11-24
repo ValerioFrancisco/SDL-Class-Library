@@ -35,7 +35,12 @@ namespace lp {
 								int yposition = SDL_WINDOWPOS_UNDEFINED,
 								Uint32 flags = SDL_WINDOW_SHOWN);
 
+			// frees the window memory
 			virtual void Close();
+
+			// Updates window
+			virtual void Update();
+
 		private:
 			SDL_Window *win;
 			SDL_Surface *surf;

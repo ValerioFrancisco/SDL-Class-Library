@@ -32,7 +32,11 @@ namespace lp {
 	}
 
 	void Window::Close() {
-		if(win != NULL) SDL_DestroyWindow(win);
+		if(win != NULL) {
+			SDL_DestroyWindow(win);
+			win = NULL;
+			error = true;
+		}
 	}
 
 	void Window::Create(const char *title,
@@ -41,12 +45,18 @@ namespace lp {
 						int xposition,
 						int yposition,
 						Uint32 flags) {
-		if(SDL_CreateWindow(title, xposition, yposition,
-						    width, height, flags) == NULL) error = true;
+		win = SDL_CreateWindow(title, xposition, yposition,
+						    width, height, flags);
+		if(win == NULL) error = true;
 		else {
 			error = false;
 			surf = SDL_GetWindowSurface(win);
+			if(surf == NULL) error = true;
 		}
+	}
+
+	void Window::Update() {
+		SDL_UpdateWindowSurface(win);
 	}
 
 } // namespace
