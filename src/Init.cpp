@@ -2,7 +2,8 @@
 #include <Init.h>
 namespace lp {
 
-	Init::Init():error(true)  {
+
+	Init::Init():error(ErrorTracker()) {
 		Initialize();
 	}
 
@@ -15,16 +16,26 @@ namespace lp {
 	}
 
 	void Init::Initialize(Uint32 flags) {
-		if(SDL_Init(flags) < 0) error = true;
-		else error = false;
+		if(SDL_Init(flags) < 0) {
+			error.Set(true, SDL_GetError());
+		}
+		else {
+			error.Set(false, "");
+		}
 	}
 
 	void Init::Close() {
 		SDL_Quit();
+		error.Set(true, "Not initialized");
 	}
 
 	bool Init::Error()const {
-		return error;
+		return error();
 	}
+
+	const char *Init::ErrorMsg()const {
+		return error.Message();
+	}
+
 
 } // namespace

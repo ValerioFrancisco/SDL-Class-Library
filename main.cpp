@@ -45,7 +45,7 @@ bool Test02() {
 		cout << "Error: " << SDL_GetError() << endl;
 	} else {
 		SDL_Surface *test = win.GetSurface();
-		surf.Blit(NULL, test);
+		surf.BlitFull(test);
 		if(surf.Error()) {
 			cout << "Error Blitting: " << SDL_GetError() << endl;
 			res = true;

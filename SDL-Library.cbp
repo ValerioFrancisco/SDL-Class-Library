@@ -44,9 +44,11 @@
 			<Add directory="D:/cpp/SDL2_image-2.8.2/i686-w64-mingw32/lib" />
 		</Linker>
 		<Unit filename="include/Init.h" />
+		<Unit filename="include/Surface.h" />
 		<Unit filename="include/Window.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Init.cpp" />
+		<Unit filename="src/Surface.cpp" />
 		<Unit filename="src/Window.cpp" />
 		<Extensions />
 	</Project>

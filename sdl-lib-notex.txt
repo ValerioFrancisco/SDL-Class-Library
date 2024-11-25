@@ -1,0 +1,9 @@
+		SDL Library Notes
+
+- Class ErrorTracker: This class serves as an internal error tracking object
+  that can be used for easier debugging. Initialy only a bool was used, but
+  given that SDL, SDL_Image and others have different functions, this class
+  helps to keep all encapsulated and less error prone.
+
+
+- Class Init: 

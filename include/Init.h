@@ -1,6 +1,6 @@
 #ifndef INIT_H
 #define INIT_H
-
+#include "ErrorTracker.h"
 namespace lp {
 
 	// Takes care of all basic SDL Initializations and closes
@@ -27,9 +27,12 @@ namespace lp {
 			// Gets the error status
 			virtual bool Error()const;
 
+			// Gets the error message
+			virtual const char *ErrorMsg()const;
+
 		private:
 			// Becomes true if there is an error in initialization
-			bool error;
+			ErrorTracker error;
 	};
 
 } // namespace

@@ -19,3 +19,8 @@ include/.Window.h.swp
 obj/Debug/src/Surface.o
 .main.cpp.swp
 Surface.vim
+include/.ErrorTracker.h.swp
+include/.Init.h.swp
+.sdl-lib-notex.txt.swp
+obj/Debug/src/ErrorTracker.o
+src/.ErrorTracker.cpp.swp

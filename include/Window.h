@@ -1,5 +1,7 @@
 #ifndef WINDOW_H
 #define WINDOW_H
+#define "ErrorTracker.h"
+
 namespace lp {
 
 	// Wraps an SDL window and takes care of its destruction
@@ -25,6 +27,7 @@ namespace lp {
 
 			// Gets error status
 			virtual bool Error()const;
+			virtual const char *Message();
 
 			// Tries to create a window and establishes its surface
 			// Called by the element constructor
@@ -44,7 +47,7 @@ namespace lp {
 		private:
 			SDL_Window *win;
 			SDL_Surface *surf;
-			bool error;
+			ErrorTracker error;
 	};
 
 } // namespace

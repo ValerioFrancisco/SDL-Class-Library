@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <Window.h>
+#include "ErrorTracker.h"
 namespace lp {
 
 	Window::Window(): win(NULL), surf(NULL), error(true) {}
