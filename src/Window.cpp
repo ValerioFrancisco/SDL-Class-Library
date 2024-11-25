@@ -1,9 +1,9 @@
 #include <SDL.h>
 #include <Window.h>
-#include "ErrorTracker.h"
+#include <ErrorTracker.h>
 namespace lp {
 
-	Window::Window(): win(NULL), surf(NULL), error(true) {}
+	Window::Window(): win(NULL), surf(NULL), error(ErrorTracker()) {}
 
 	Window::Window(const char *title,
 				   int width,
@@ -12,7 +12,7 @@ namespace lp {
 				   int yposition,
 				   Uint32 flags): win(NULL),
 							      surf(NULL),
-							      error(true){
+							      error(ErrorTracker()){
 		Create(title, width, height, xposition, yposition, flags);
 	}
 
@@ -29,14 +29,18 @@ namespace lp {
 	}
 
 	bool Window::Error()const {
-		return error;
+		return error();
+	}
+
+	const char *Window::ErrorMsg()const {
+		return error.Message();
 	}
 
 	void Window::Close() {
 		if(win != NULL) {
 			SDL_DestroyWindow(win);
 			win = NULL;
-			error = true;
+			error.Set(true, "Not Initialized");
 		}
 	}
 
@@ -48,16 +52,21 @@ namespace lp {
 						Uint32 flags) {
 		win = SDL_CreateWindow(title, xposition, yposition,
 						    width, height, flags);
-		if(win == NULL) error = true;
+		if(win == NULL) error.Set(true, SDL_GetError());
 		else {
-			error = false;
 			surf = SDL_GetWindowSurface(win);
-			if(surf == NULL) error = true;
+			if(surf == NULL) {
+				error.Set(true, SDL_GetError());
+			}
+			error.Set(false, "");
 		}
 	}
 
 	void Window::Update() {
-		SDL_UpdateWindowSurface(win);
+		if(!error()) {
+			if(SDL_UpdateWindowSurface(win) < 0) 
+				error.Set(true, SDL_GetError());
+		}
 	}
 
 } // namespace

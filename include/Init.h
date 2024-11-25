@@ -1,6 +1,6 @@
 #ifndef INIT_H
 #define INIT_H
-#include "ErrorTracker.h"
+#include <ErrorTracker.h>
 namespace lp {
 
 	// Takes care of all basic SDL Initializations and closes

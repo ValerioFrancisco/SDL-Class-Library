@@ -24,3 +24,4 @@ include/.Init.h.swp
 .sdl-lib-notex.txt.swp
 obj/Debug/src/ErrorTracker.o
 src/.ErrorTracker.cpp.swp
+src/.Init.cpp.swp

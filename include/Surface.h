@@ -1,6 +1,6 @@
 #ifndef SURFACE_H
 #define SURFACE_H
-#include "ErrorTracker.h"
+#include <ErrorTracker.h>
 namespace lp {
 
 	// Encapsulates SDL surfaces and related operations

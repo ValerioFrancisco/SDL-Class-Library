@@ -4,7 +4,6 @@
 namespace lp {
 
 	// Auxiliar class to keep track of errors in SDL code
-	// requires <string>
 	class ErrorTracker {
 		public:
 			ErrorTracker();

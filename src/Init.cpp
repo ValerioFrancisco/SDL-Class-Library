@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <ErrorTracker.h>
 #include <Init.h>
 namespace lp {
 

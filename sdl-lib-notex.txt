@@ -1,9 +1,21 @@
 		SDL Library Notes
 
+
+	25/11/1980
+
 - Class ErrorTracker: This class serves as an internal error tracking object
   that can be used for easier debugging. Initialy only a bool was used, but
   given that SDL, SDL_Image and others have different functions, this class
   helps to keep all encapsulated and less error prone.
 
 
-- Class Init: 
+- Class Init: This class initializes SDL subsystems, the default constructor
+  inits the basic video mode.
+  	
+- Class Window: Takes care of basic SDL window creation and update.
+
+- Class Surface: Takes care of SDL_Surface pointers and managed memory. This
+  helps to prevent leaks.
+
+These classes are to be enriched along the way, first need to implement the
+ErrorTracker in all other classes as this was developed after those.

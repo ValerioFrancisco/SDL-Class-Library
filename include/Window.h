@@ -1,6 +1,6 @@
 #ifndef WINDOW_H
 #define WINDOW_H
-#define "ErrorTracker.h"
+#include <ErrorTracker.h>
 
 namespace lp {
 
@@ -27,7 +27,7 @@ namespace lp {
 
 			// Gets error status
 			virtual bool Error()const;
-			virtual const char *Message();
+			virtual const char *ErrorMsg()const;
 
 			// Tries to create a window and establishes its surface
 			// Called by the element constructor
