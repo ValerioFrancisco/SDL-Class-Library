@@ -34,6 +34,12 @@ namespace lp {
 			// Blits the full loaded Surface
 			virtual void BlitFull(SDL_Surface *dest, 
 								  SDL_Rect *dest_rect = NULL); 
+			
+			// Blits a scaled optimized Surface
+			virtual void BlitScaled(SDL_Rect * src_rect, SDL_Surface *dest,
+									SDL_Rect *dest_rect = NULL);
+			virtual void BlitScaledFull(SDL_Surface *dest,
+										SDL_Rect *dest_rect);
 
 			// Frees memory if allocated
 			virtual void Close();

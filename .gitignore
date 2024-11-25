@@ -25,3 +25,4 @@ include/.Init.h.swp
 obj/Debug/src/ErrorTracker.o
 src/.ErrorTracker.cpp.swp
 src/.Init.cpp.swp
+src/.Init.cpp.swp

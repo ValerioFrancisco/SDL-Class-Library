@@ -14,10 +14,11 @@ const int SCR_WIDTH = 640,
 // Test Functions
 bool Test01();
 bool Test02();
+bool Test03();
 
 int main(int argc, char *argv[])
 {
-    return Test02();
+    return Test03();
 }
 
 
@@ -54,6 +55,47 @@ bool Test02() {
 	SDL_Event e; bool quit = false; while( quit == false && res == 0 ){
 		while( SDL_PollEvent( &e ) ){
 			if( e.type == SDL_QUIT ) quit = true;
+		}
+	}
+	return res;
+}
+
+bool Test03() {
+	bool res = false;
+	Init init;
+	Window win("Optimize and strech an image", 800, 600);
+	if(init.Error()) {
+		cout << "Error: " << init.ErrorMsg() << endl;
+		res = true;
+	}
+	else {
+		if(win.Error()) {
+			cout << "Error: " << win.ErrorMsg() << endl;
+			res = true;
+		}
+		else {
+			Surface surf;
+			surf.LoadBMP("media/ola.bmp");
+			surf.Optimize(win.GetSurface()->format);
+			SDL_Rect dst;
+			dst.x = 0; dst.y = 0; dst.w = 800; dst.h = 600;
+			surf.BlitScaledFull(win.GetSurface(), &dst);
+			if(surf.Error()) {
+				cout << "Error: " << surf.ErrorMsg() << endl;
+				res = true;
+			}
+		}
+	}
+	win.Update();
+	if(win.Error()) {
+		cout << "Error " << win.ErrorMsg() << endl;
+		res = true;
+	}
+	SDL_Event e;
+	bool quit = false;
+	while(!quit && !res) {
+		while(SDL_PollEvent(&e)) {
+			if(e.type == SDL_QUIT) quit = true;
 		}
 	}
 	return res;

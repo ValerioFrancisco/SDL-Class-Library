@@ -56,6 +56,23 @@ namespace lp {
 		}
 	}
 
+	void Surface::BlitScaled(SDL_Rect *src_rect, SDL_Surface *dest,
+							 SDL_Rect *dest_rect) {
+		if(!error()) {
+			if(SDL_BlitScaled(surf, src_rect, dest, dest_rect) < 0) {
+				error.Set(true, SDL_GetError());
+			}
+		}
+	}
+
+	void Surface::BlitScaledFull(SDL_Surface *dest, SDL_Rect *dest_rect) {
+		if(!error()) {
+			if(SDL_BlitScaled(surf, NULL, dest, dest_rect) < 0) {
+				error.Set(true, SDL_GetError());
+			}
+		}
+	}
+
 	void Surface::Optimize(SDL_PixelFormat *format, Uint32 flags) {
 		if(!error()) { 
 			SDL_Surface *aux = SDL_ConvertSurface(surf, format, flags);
