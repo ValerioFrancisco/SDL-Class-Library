@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SDL.h>
+#include <SDL_image.h>
 #include <Init.h>
 #include <Window.h>
 #include <Surface.h>
@@ -15,10 +16,11 @@ const int SCR_WIDTH = 640,
 bool Test01();
 bool Test02();
 bool Test03();
+bool Test04();
 
 int main(int argc, char *argv[])
 {
-    return Test03();
+    return Test04();
 }
 
 
@@ -97,6 +99,40 @@ bool Test03() {
 		while(SDL_PollEvent(&e)) {
 			if(e.type == SDL_QUIT) quit = true;
 		}
+	}
+	return res;
+}
+
+bool Test04() {
+	int res = false;
+	Init init;
+	init.InitImage(IMG_INIT_PNG);
+	Window win("Testing PNG loading", SCR_WIDTH, SCR_HEIGHT);
+	Surface surf;
+	if(init.Error()) {
+		cout << init.ErrorMsg() << endl;
+		res = true;
+	}
+	else if (win.Error()) {
+		cout << win.ErrorMsg() << endl;
+		res = true;
+	}
+	else {
+		surf.LoadImage("media/loaded.png");
+		surf.Optimize(win.GetSurface()->format);
+		if(surf.Error()) {
+			cout << surf.ErrorMsg();
+			res = true;
+		}
+	}
+	SDL_Event e;
+	bool quit = false;
+	while(!quit && !res) {
+		while(SDL_PollEvent(&e)){
+			if(e.type == SDL_QUIT) quit = true;
+		}
+		surf.BlitFull(win.GetSurface());
+		win.Update();
 	}
 	return res;
 }

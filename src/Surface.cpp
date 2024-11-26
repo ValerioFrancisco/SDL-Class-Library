@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_image.h>
 #include <ErrorTracker.h>
 #include <Surface.h>
 namespace lp {
@@ -25,6 +26,16 @@ namespace lp {
 		surf = SDL_LoadBMP(file);
 		if(surf ==NULL) {
 			error.Set(true, SDL_GetError());
+		}
+		else {
+			error.Set(false, "");
+		}
+	}
+
+	void Surface::LoadImage(const char *file) {
+		surf = IMG_Load(file);
+		if(surf == NULL) {
+			error.Set(true, IMG_GetError());
 		}
 		else {
 			error.Set(false, "");

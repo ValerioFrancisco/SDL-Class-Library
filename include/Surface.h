@@ -20,6 +20,8 @@ namespace lp {
 
 			// Loads a bitmap onto the surface
 			virtual void LoadBMP(const char *file);
+			// Loads an SDL_image image type
+			virtual void LoadImage(const char *file);
 
 			// Optimizes surface to the desired format
 			// deallocates the old surface after

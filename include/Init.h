@@ -21,6 +21,12 @@ namespace lp {
 			// Initializes SDL with only video by default
 			virtual void Initialize(Uint32 flags = SDL_INIT_VIDEO);
 
+			// Initialize Image loading
+			// IMG_INIT_JPG
+			// IMG_INIT_PNG
+			// IMG_INIT_TIF
+			virtual void InitImage(int flags);
+
 			// Closes SDL subsystems
 			virtual void Close();
 

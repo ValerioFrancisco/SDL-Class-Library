@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_image.h>
 #include <ErrorTracker.h>
 #include <Init.h>
 namespace lp {
@@ -25,7 +26,16 @@ namespace lp {
 		}
 	}
 
+	void Init::InitImage(int flags) {
+		if(!error()) {
+			if(!IMG_Init(flags) & flags) {
+				error.Set(true, IMG_GetError());
+			}
+		}
+	}
+
 	void Init::Close() {
+		IMG_Quit();
 		SDL_Quit();
 		error.Set(true, "Not initialized");
 	}
