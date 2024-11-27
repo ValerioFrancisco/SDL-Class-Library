@@ -20,6 +20,9 @@ namespace lp {
 			// Loads directly from a file, discarding the surface
 			virtual void FromFile(const char *file, Renderer& ren);
 
+			virtual void FromFileColorKey(const char *file, Renderer &ren,
+						Uint8 r = 0xFF, Uint8 g = 0xFF, Uint8 b = 0xFF);
+
 			virtual void Close();
 		private:
 			SDL_Texture *texture;

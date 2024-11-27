@@ -40,6 +40,19 @@ namespace lp {
 		}
 	}
 
+	void Texture::FromFileColorKey(const char *file, Renderer &ren,
+					Uint8 r, Uint8 g, Uint8 b) {
+		Surface surf;
+		surf.LoadImage(file);
+		surf.SetColorKey(r, g, b);
+		if(surf.Error()) {
+			error.Set(true, surf.ErrorMsg());
+		}
+		else {
+			FromSurface(ren, surf);
+		}
+	}
+
 	void Texture::Close() {
 		if(texture != NULL) {
 			SDL_DestroyTexture(texture);

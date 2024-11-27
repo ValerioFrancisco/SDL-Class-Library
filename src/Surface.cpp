@@ -50,6 +50,16 @@ namespace lp {
 		}
 	}
 
+	
+	void Surface::SetColorKey(Uint8 r, Uint8 g, Uint8 b) {
+		if(!error()) {
+			if(SDL_SetColorKey(surf, SDL_TRUE, 
+							   SDL_MapRGB(surf->format, r, g, b)) < 0) {
+				error.Set(true, SDL_GetError());
+			}
+		}
+	}
+
 	void Surface::Blit(SDL_Rect *src_rect, SDL_Surface *dest,
 					   SDL_Rect *dest_rect) {
 		if(!error()) {

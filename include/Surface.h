@@ -27,6 +27,8 @@ namespace lp {
 			// deallocates the old surface after
 			virtual void Optimize(SDL_PixelFormat *format, 
 								  Uint32 flags = 0);
+			// Sets the transparent pixel
+			virtual void SetColorKey(Uint8 r, Uint8 g, Uint8 b);
 
 			// Blits the source rectangle fom this surface to the
 			// destination surface rectangle 

@@ -39,6 +39,65 @@ namespace lp {
 		}
 	}
 
+	void Renderer::DrawPoint(int x, int y) {
+		if(!error()) {
+			if(SDL_RenderDrawPoint(ren, x,y) < 0) {
+				error.Set(true, SDL_GetError());
+			}
+		}
+	}
+	
+	void Renderer::DrawLine(int x1, int y1, int x2, int y2) {
+		if(!error()) {
+			if(SDL_RenderDrawLine(ren, x1, y1, x2, y2) < 0) {
+				error.Set(true, SDL_GetError());
+			}
+		}
+	}	
+	void Renderer::DrawRect(const SDL_Rect &rect) {
+		if(!error()) {
+			if(SDL_RenderDrawRect(ren, &rect) < 0) {
+				error.Set(true, SDL_GetError());
+			}
+		}
+	}
+
+	void Renderer::FillRect(const SDL_Rect &rect) {
+		if(!error()) {
+			if(SDL_RenderFillRect(ren, &rect) < 0) {
+				error.Set(true, SDL_GetError());
+			}
+		}
+	}
+
+	void Renderer::SetViewport(const SDL_Rect &vp) {
+		if(!error()) {
+			if(SDL_RenderSetViewport(ren, &vp) < 0) {
+				error.Set(true, SDL_GetError());
+			}
+		}
+	}
+
+	void Renderer::ResetViewport() {
+		if(!error()) {
+			if(SDL_RenderSetViewport(ren, NULL) < 0) {
+				error.Set(true, SDL_GetError());
+			}
+		}
+	}
+
+	SDL_Rect Renderer::GetViewport()const {
+		SDL_Rect res;
+		SDL_RenderGetViewport(ren, &res);
+		return res;
+	}
+
+	void Renderer::Clear() {
+		if(!error()) {
+			if(SDL_RenderClear(ren) < 0) error.Set(true, SDL_GetError());
+		}
+	}
+
 	void Renderer::Present() {
 		if(!error()) {
 			SDL_RenderPresent(ren);

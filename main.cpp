@@ -21,6 +21,7 @@ bool Test02();
 bool Test03();
 bool Test04();
 bool Test05();
+bool Test06();
 
 int main(int argc, char *argv[])
 {
@@ -142,13 +143,13 @@ bool Test04() {
 }
 
 bool Test05() {
-	int res = false;
+	bool res = false;
 	Init init;
 	init.InitImage(IMG_INIT_PNG);
 	Window win("Testing Textures and rendering", 800, 600);
 	Renderer ren;
 	ren.Create(win);
-	ren.SetDrawColor(0xFF, 0xFF, 0xFF);
+	ren.SetDrawColor(0x00, 0x00, 0x00);
 	Texture txtr;
 
 	if(init.Error()) {
@@ -164,7 +165,7 @@ bool Test05() {
 		res = true;
 	}
 	else {
-		txtr.FromFile("media/caravela.png", ren);
+		txtr.FromFileColorKey("media/caravela.png", ren);
 		if(txtr.Error()) {
 			cout << "Texture: " << txtr.ErrorMsg() << endl;
 			res = true;
@@ -176,6 +177,7 @@ bool Test05() {
 		while(SDL_PollEvent(&e)){
 			if(e.type == SDL_QUIT) quit = true;
 		}
+		ren.Clear();
 		ren.Copy(txtr.GetTexture());
 		if(ren.Error()) {
 			std::cout << "Copy: " << ren.ErrorMsg() << endl;
@@ -186,4 +188,52 @@ bool Test05() {
 		}
 	}
 	return res;
+}
+
+bool Test06() {
+	bool res = false;
+	Init init;
+	Window win("Drawing", SCR_WIDTH, SCR_HEIGHT);
+	Renderer ren;
+	ren.Create(win);
+	
+	SDL_Event e;
+	bool quit = false;
+	while(!quit && !res) {
+		while(SDL_PollEvent(&e)){
+			if(e.type == SDL_QUIT) quit = true;
+		}
+		SDL_Rect vpsize;
+		vpsize.x = 0; vpsize.y=0; vpsize.w=100; vpsize.h=100;
+		SDL_Rect vp;
+		vp.x = SCR_WIDTH - 110;
+		vp.y = SCR_HEIGHT - 110;
+		vp.w = 100;
+		vp.h = 100;
+		ren.SetDrawColor(0xFF, 0xFF, 0xFF);
+		ren.Clear();
+		ren.SetDrawColor(0x00, 0x00, 0x00);
+		ren.DrawPoint(SCR_WIDTH / 2, SCR_HEIGHT / 2);
+		ren.DrawLine(0, 40, SCR_WIDTH, 40);
+		SDL_Rect rect;
+		rect.x = 50;
+		rect.y = 50;
+		rect.w = 20;
+		rect.h = 20;
+		ren.DrawRect(rect);
+		SDL_Rect rect2;
+		rect2.x = 20;
+		rect2.y = 20;
+		rect2.w = 20;
+		rect2.h = 20;
+		ren.SetViewport(vp);
+		ren.SetDrawColor(0x00, 0x00, 0x00);
+		ren.FillRect(vpsize);
+		ren.SetDrawColor(0xFF, 0xFF, 0xFF);
+		ren.FillRect(rect2);
+		ren.ResetViewport();
+		ren.Present();
+	}
+	return res;
+
 }

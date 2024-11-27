@@ -34,6 +34,18 @@ namespace lp {
 			// NULL copies the whole texture to the whole destination
 			virtual void Copy(SDL_Texture *texture, const SDL_Rect *src= NULL,
 					  const SDL_Rect *dest = NULL);
+
+			// Renders a point
+			virtual void DrawPoint(int x, int y);
+			virtual void DrawLine(int x1, int y1, int x2, int y2);
+			virtual void DrawRect(const SDL_Rect &rect);
+			virtual void FillRect(const SDL_Rect &rect);
+
+			virtual void SetViewport(const SDL_Rect& vp);
+			virtual void ResetViewport();
+			virtual SDL_Rect GetViewport()const;
+
+			virtual void Clear();
 			
 			virtual void Present();
 
