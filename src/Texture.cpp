@@ -29,6 +29,17 @@ namespace lp {
 		}
 	}
 
+	void Texture::FromFile(const char *file, Renderer &ren) {
+		Surface surf;
+		surf.LoadImage(file);
+		if(surf.Error()) {
+			error.Set(true, surf.ErrorMsg());
+		}
+		else {
+			FromSurface(ren, surf);
+		}
+	}
+
 	void Texture::Close() {
 		if(texture != NULL) {
 			SDL_DestroyTexture(texture);

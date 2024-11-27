@@ -47,6 +47,9 @@ namespace lp {
 		private:
 			SDL_Window *win;
 			ErrorTracker error;
+
+			// Prevent Copy construction
+			Window(const Window &other);
 	};
 
 } // namespace

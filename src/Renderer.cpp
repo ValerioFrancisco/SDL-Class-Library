@@ -16,8 +16,8 @@ namespace lp {
 
 	const char *Renderer::ErrorMsg()const { return error.Message(); }
 
-	void Renderer::Create(SDL_Window *win, int index, Uint32 flags) {
-		ren = SDL_CreateRenderer(win, index, flags);
+	void Renderer::Create(Window &win, int index, Uint32 flags) {
+		ren = SDL_CreateRenderer(win.GetWindow(), index, flags);
 		if(ren == NULL) error.Set(true, SDL_GetError());
 		else error.Set(false, "");
 	}

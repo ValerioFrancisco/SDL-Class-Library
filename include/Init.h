@@ -39,6 +39,8 @@ namespace lp {
 		private:
 			// Becomes true if there is an error in initialization
 			ErrorTracker error;
+
+			Init(const Init &other);
 	};
 
 } // namespace

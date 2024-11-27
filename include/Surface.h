@@ -48,6 +48,9 @@ namespace lp {
 		private:
 			SDL_Surface *surf;
 			ErrorTracker error;
+
+			// Prevent copy construction
+			Surface(const Surface& other);
 	};
 
 } // namespace

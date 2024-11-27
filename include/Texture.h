@@ -14,12 +14,19 @@ namespace lp {
 			virtual bool Error()const;
 			virtual const char *ErrorMsg()const;
 
+			// Creates Texture from a surface
 			virtual void FromSurface(Renderer &ren, Surface &surf);
+
+			// Loads directly from a file, discarding the surface
+			virtual void FromFile(const char *file, Renderer& ren);
 
 			virtual void Close();
 		private:
 			SDL_Texture *texture;
 			ErrorTracker error;
+
+			// Prevent copy construction
+			Texture(const Texture& other);
 };
 
 } // namespace

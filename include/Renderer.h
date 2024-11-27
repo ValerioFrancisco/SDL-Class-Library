@@ -21,7 +21,7 @@ namespace lp {
 			// SDL_RENDERER_ACCELERATED
 			// SDL_RENDERER_PRESENTVSYNC
 			// SDL_RENDERER_TARGETTEXTURE
-			virtual void Create(SDL_Window *win,
+			virtual void Create(Window &win,
 							    int index = -1,
 								Uint32 flags = SDL_RENDERER_ACCELERATED);
 			
@@ -42,6 +42,9 @@ namespace lp {
 		private:
 			SDL_Renderer *ren;
 			ErrorTracker error;
+
+			// Prevent copy construction
+			Renderer(const Renderer &other);
 	};
 
 } // namespace

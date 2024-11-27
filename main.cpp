@@ -147,8 +147,8 @@ bool Test05() {
 	init.InitImage(IMG_INIT_PNG);
 	Window win("Testing Textures and rendering", 800, 600);
 	Renderer ren;
-	ren.Create(win.GetWindow());
-	Surface surf;
+	ren.Create(win);
+	ren.SetDrawColor(0xFF, 0xFF, 0xFF);
 	Texture txtr;
 
 	if(init.Error()) {
@@ -164,24 +164,10 @@ bool Test05() {
 		res = true;
 	}
 	else {
-		surf.LoadImage("media/caravela.png");
-		if(surf.Error()) {
-			cout << "Surface: " << surf.ErrorMsg() << endl;
+		txtr.FromFile("media/caravela.png", ren);
+		if(txtr.Error()) {
+			cout << "Texture: " << txtr.ErrorMsg() << endl;
 			res = true;
-		}
-		else {
-			txtr.FromSurface(ren, surf);
-			if(txtr.Error()) {
-				cout << "Texture: " << txtr.ErrorMsg() << endl;
-				res = true;
-			}
-			else {
-				ren.SetDrawColor(0xFF, 0xFF, 0xFF);
-				if(ren.Error()) {
-					cout << "Draw: " << ren.ErrorMsg() << endl;
-					res = true;
-				}
-			}
 		}
 	}
 	SDL_Event e;
