@@ -28,7 +28,7 @@ namespace lp {
 
 	void Init::InitImage(int flags) {
 		if(!error()) {
-			if(!IMG_Init(flags) & flags) {
+			if(!(IMG_Init(flags) & flags)) {
 				error.Set(true, IMG_GetError());
 			}
 		}

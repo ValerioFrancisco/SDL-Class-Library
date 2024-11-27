@@ -26,3 +26,8 @@ obj/Debug/src/ErrorTracker.o
 src/.ErrorTracker.cpp.swp
 src/.Init.cpp.swp
 src/.Init.cpp.swp
+src/.Renderer.cpp.swp
+include/.Renderer.h.swp
+*.swp
+*.vim
+*.o

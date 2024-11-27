@@ -2,8 +2,11 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <Init.h>
+#include <Renderer.h>
 #include <Window.h>
 #include <Surface.h>
+#include <Texture.h>
+
 
 using namespace std;
 using namespace lp;
@@ -17,10 +20,11 @@ bool Test01();
 bool Test02();
 bool Test03();
 bool Test04();
+bool Test05();
 
 int main(int argc, char *argv[])
 {
-    return Test04();
+    return Test05();
 }
 
 
@@ -133,6 +137,67 @@ bool Test04() {
 		}
 		surf.BlitFull(win.GetSurface());
 		win.Update();
+	}
+	return res;
+}
+
+bool Test05() {
+	int res = false;
+	Init init;
+	init.InitImage(IMG_INIT_PNG);
+	Window win("Testing Textures and rendering", 800, 600);
+	Renderer ren;
+	ren.Create(win.GetWindow());
+	Surface surf;
+	Texture txtr;
+
+	if(init.Error()) {
+		cout << "Init: " << init.ErrorMsg() << endl;
+		res = true;
+	}
+	else if (win.Error()) {
+		cout << "Window: " << win.ErrorMsg() << endl;
+		res = true;
+	}
+	else if (ren.Error()) {
+		cout << "Renderer: " << ren.ErrorMsg() << endl;
+		res = true;
+	}
+	else {
+		surf.LoadImage("media/caravela.png");
+		if(surf.Error()) {
+			cout << "Surface: " << surf.ErrorMsg() << endl;
+			res = true;
+		}
+		else {
+			txtr.FromSurface(ren, surf);
+			if(txtr.Error()) {
+				cout << "Texture: " << txtr.ErrorMsg() << endl;
+				res = true;
+			}
+			else {
+				ren.SetDrawColor(0xFF, 0xFF, 0xFF);
+				if(ren.Error()) {
+					cout << "Draw: " << ren.ErrorMsg() << endl;
+					res = true;
+				}
+			}
+		}
+	}
+	SDL_Event e;
+	bool quit = false;
+	while(!quit && !res) {
+		while(SDL_PollEvent(&e)){
+			if(e.type == SDL_QUIT) quit = true;
+		}
+		ren.Copy(txtr.GetTexture());
+		if(ren.Error()) {
+			std::cout << "Copy: " << ren.ErrorMsg() << endl;
+			res = true;
+		}
+		else {
+			ren.Present();
+		}
 	}
 	return res;
 }

@@ -45,12 +45,16 @@
 		</Linker>
 		<Unit filename="include/ErrorTracker.h" />
 		<Unit filename="include/Init.h" />
+		<Unit filename="include/Renderer.h" />
 		<Unit filename="include/Surface.h" />
+		<Unit filename="include/Texture.h" />
 		<Unit filename="include/Window.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ErrorTracker.cpp" />
 		<Unit filename="src/Init.cpp" />
+		<Unit filename="src/Renderer.cpp" />
 		<Unit filename="src/Surface.cpp" />
+		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/Window.cpp" />
 		<Extensions />
 	</Project>

@@ -13,7 +13,7 @@ namespace lp {
 			// Creates the window
 			Window(const char *title,
 				   int width,
-				   int height, 
+				   int height,
 				   int xposition = SDL_WINDOWPOS_UNDEFINED,
 				   int yposition = SDL_WINDOWPOS_UNDEFINED,
 				   Uint32 flags = SDL_WINDOW_SHOWN);
@@ -33,7 +33,7 @@ namespace lp {
 			// Called by the element constructor
 			virtual void Create(const char *title,
 								int width,
-								int height, 
+								int height,
 								int xposition = SDL_WINDOWPOS_UNDEFINED,
 								int yposition = SDL_WINDOWPOS_UNDEFINED,
 								Uint32 flags = SDL_WINDOW_SHOWN);
@@ -46,7 +46,6 @@ namespace lp {
 
 		private:
 			SDL_Window *win;
-			SDL_Surface *surf;
 			ErrorTracker error;
 	};
 
