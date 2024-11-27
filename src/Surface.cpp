@@ -23,6 +23,7 @@ namespace lp {
 	}
 
 	void Surface::LoadBMP(const char *file){
+		if(!error()) Close();
 		surf = SDL_LoadBMP(file);
 		if(surf ==NULL) {
 			error.Set(true, SDL_GetError());
@@ -33,6 +34,7 @@ namespace lp {
 	}
 
 	void Surface::LoadImage(const char *file) {
+		if(!error()) Close();
 		surf = IMG_Load(file);
 		if(surf == NULL) {
 			error.Set(true, IMG_GetError());

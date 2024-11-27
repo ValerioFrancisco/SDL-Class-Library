@@ -34,6 +34,19 @@ namespace lp {
 			// NULL copies the whole texture to the whole destination
 			virtual void Copy(SDL_Texture *texture, const SDL_Rect *src= NULL,
 					  const SDL_Rect *dest = NULL);
+		
+			// Same as above, but with extra parameters, angle of rotation 
+			// around a center point (NULL for center of texture) and flip
+			// that can be:
+			// SDL_FLIP_NONE
+			// SDL_FLIP_HORIZONTAL
+			// SDL_FLIP_VERTICAL
+			virtual void CopyEx(SDL_Texture *txtr, 
+								const SDL_Rect *src,
+								const SDL_Rect *dest,
+								const double angle,
+								const SDL_Point *center = NULL,
+								const SDL_RendererFlip flip = SDL_FLIP_NONE);
 
 			// Renders a point
 			virtual void DrawPoint(int x, int y);

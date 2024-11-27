@@ -17,6 +17,7 @@ namespace lp {
 	const char *Renderer::ErrorMsg()const { return error.Message(); }
 
 	void Renderer::Create(Window &win, int index, Uint32 flags) {
+		if(!error()) { Close(); }
 		ren = SDL_CreateRenderer(win.GetWindow(), index, flags);
 		if(ren == NULL) error.Set(true, SDL_GetError());
 		else error.Set(false, "");
@@ -34,6 +35,19 @@ namespace lp {
 						 const SDL_Rect *dest) {
 		if(!error()) {
 			if(SDL_RenderCopy(ren, texture, src, dest) < 0) {
+				error.Set(true, SDL_GetError());
+			}
+		}
+	}
+
+	void Renderer::CopyEx(SDL_Texture *txtr, 
+						  const SDL_Rect *src,
+						  const SDL_Rect *dest,
+						  const double angle,
+						  const SDL_Point *center,
+						  const SDL_RendererFlip flip) {
+		if(!error()) {
+			if(SDL_RenderCopyEx(ren, txtr, src, dest, angle, center, flip)<0) {
 				error.Set(true, SDL_GetError());
 			}
 		}

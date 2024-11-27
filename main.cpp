@@ -166,6 +166,7 @@ bool Test05() {
 	}
 	else {
 		txtr.FromFileColorKey("media/caravela.png", ren);
+		txtr.SetAlpha(50);
 		if(txtr.Error()) {
 			cout << "Texture: " << txtr.ErrorMsg() << endl;
 			res = true;
@@ -178,7 +179,7 @@ bool Test05() {
 			if(e.type == SDL_QUIT) quit = true;
 		}
 		ren.Clear();
-		ren.Copy(txtr.GetTexture());
+		ren.CopyEx(txtr.GetTexture(),NULL, NULL, 90.0);
 		if(ren.Error()) {
 			std::cout << "Copy: " << ren.ErrorMsg() << endl;
 			res = true;

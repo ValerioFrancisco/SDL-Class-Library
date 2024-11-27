@@ -31,3 +31,4 @@ include/.Renderer.h.swp
 *.swp
 *.vim
 *.o
+*.dll
