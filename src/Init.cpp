@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <ErrorTracker.h>
 #include <Init.h>
 namespace lp {
@@ -39,6 +40,15 @@ namespace lp {
 		if(!error()) {
 			if(TTF_Init() == -1) {
 				error.Set(true, TTF_GetError());
+			}
+		}
+	}
+
+	void Init::InitMixer(int frequency, Uint32 format, int channels,
+						 int chunksize) {
+		if(!error()) {
+			if(Mix_OpenAudio(frequency, format, channels, chunksize) < 0) {
+				error.Set(true, Mix_GetError());
 			}
 		}
 	}

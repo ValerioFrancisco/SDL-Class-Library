@@ -2,7 +2,10 @@
 #include <string>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <Init.h>
+#include <Soundfx.h>
+#include <Music.h>
 #include <Font.h>
 #include <Renderer.h>
 #include <Window.h>
@@ -25,10 +28,11 @@ bool Test04();
 bool Test05();
 bool Test06();
 bool Test07();
+bool Test08();
 
 int main(int argc, char *argv[])
 {
-    return Test07();
+    return Test08();
 }
 
 
@@ -200,7 +204,7 @@ bool Test06() {
 	Window win("Drawing", SCR_WIDTH, SCR_HEIGHT);
 	Renderer ren;
 	ren.Create(win);
-	
+
 	SDL_Event e;
 	bool quit = false;
 	while(!quit && !res) {
@@ -294,4 +298,54 @@ bool Test07() {
 	}
 	return res;
 
+}
+
+bool Test08() {
+	bool res = false;
+	Init init;
+	init.InitMixer();
+	Window win("Testing Sounds", SCR_WIDTH, SCR_HEIGHT);
+	Soundfx hi, med, low;
+	Music music;
+	hi.LoadWAV("media/high.wav");
+	med.LoadWAV("media/medium.wav");
+	low.LoadWAV("media/low.wav");
+	music.LoadMusic("media/beat.wav");
+	SDL_Event e;
+	bool quit = false;
+	while(!quit && !res) {
+		while(SDL_PollEvent(&e)) {
+			if(e.type == SDL_QUIT) quit = true;
+			else {
+				if(e.type == SDL_KEYDOWN) {
+					switch(e.key.keysym.sym) {
+						case SDLK_a:
+							hi.Play();
+							break;
+						case SDLK_s:
+							med.Play();
+							break;
+						case SDLK_d:
+							low.Play();
+							break;
+						case SDLK_p:
+							music.Play();
+							break;
+						case SDLK_o:
+							music.Pause();
+							break;
+						case SDLK_i:
+							music.Resume();
+							break;
+						case SDLK_u:
+							music.Stop();
+							break;
+						default:
+							break;
+					}
+				}
+			}
+		}
+	}
+	return res;
 }

@@ -37,18 +37,22 @@
 			<Add directory="D:/cpp/SDL2-2.30.9/i686-w64-mingw32/include/SDL2" />
 			<Add directory="D:/cpp/SDL2_image-2.8.2/i686-w64-mingw32/include/SDL2" />
 			<Add directory="D:/cpp/SDL2_ttf-2.22.0/i686-w64-mingw32/include/SDL2" />
+			<Add directory="D:/cpp/SDL2_mixer-2.8.0/i686-w64-mingw32/include/SDL2" />
 		</Compiler>
 		<Linker>
-			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf" />
+			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer" />
 			<Add directory="src" />
 			<Add directory="D:/cpp/SDL2-2.30.9/i686-w64-mingw32/lib" />
 			<Add directory="D:/cpp/SDL2_image-2.8.2/i686-w64-mingw32/lib" />
 			<Add directory="D:/cpp/SDL2_ttf-2.22.0/i686-w64-mingw32/lib" />
+			<Add directory="D:/cpp/SDL2_mixer-2.8.0/i686-w64-mingw32/lib" />
 		</Linker>
 		<Unit filename="include/ErrorTracker.h" />
 		<Unit filename="include/Font.h" />
 		<Unit filename="include/Init.h" />
+		<Unit filename="include/Music.h" />
 		<Unit filename="include/Renderer.h" />
+		<Unit filename="include/Soundfx.h" />
 		<Unit filename="include/Surface.h" />
 		<Unit filename="include/Texture.h" />
 		<Unit filename="include/Window.h" />
@@ -56,7 +60,9 @@
 		<Unit filename="src/ErrorTracker.cpp" />
 		<Unit filename="src/Font.cpp" />
 		<Unit filename="src/Init.cpp" />
+		<Unit filename="src/Music.cpp" />
 		<Unit filename="src/Renderer.cpp" />
+		<Unit filename="src/Soundfx.cpp" />
 		<Unit filename="src/Surface.cpp" />
 		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/Window.cpp" />
