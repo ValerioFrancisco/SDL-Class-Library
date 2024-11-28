@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <Font.h>
 #include <ErrorTracker.h>
 
 namespace lp {
@@ -26,7 +27,7 @@ namespace lp {
 	}
 
 	void Font::Close() {
-		if(!error || font != NULL) {
+		if(!error() || font != NULL) {
 			TTF_CloseFont(font);
 			font = NULL;
 			error.Set(true, "Not Initialized");

@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <Font.h>
 #include <Surface.h>
 #include <Renderer.h>
 #include <Texture.h>
@@ -21,6 +22,7 @@ namespace lp {
 	int Texture::GetHeight()const { return height; }
 
 	void Texture::FromSurface(Renderer &ren, Surface &surf){
+		Close();
 		if(!surf.Error() && !ren.Error()) {
 			texture = SDL_CreateTextureFromSurface(ren.GetRenderer(),
 												   surf.GetSurface());
@@ -57,6 +59,19 @@ namespace lp {
 		if(surf.Error()) {
 			error.Set(true, surf.ErrorMsg());
 		}
+		else {
+			width = surf.GetSurface()->w;
+			height = surf.GetSurface()->h;
+			FromSurface(ren, surf);
+		}
+	}
+
+	void Texture::FromSolidFont(Font &font, const char *text, SDL_Color color,
+								Renderer &ren){
+		Close();
+		Surface surf;
+		surf.LoadSolidFont(font.GetFont(), text, color);
+		if(surf.Error()) error.Set(true, surf.ErrorMsg());
 		else {
 			width = surf.GetSurface()->w;
 			height = surf.GetSurface()->h;

@@ -53,6 +53,7 @@ namespace lp {
 						int xposition,
 						int yposition,
 						Uint32 flags) {
+		if(!error() || win != NULL) Close();
 		win = SDL_CreateWindow(title, xposition, yposition,
 						    width, height, flags);
 		if(win == NULL) error.Set(true, SDL_GetError());

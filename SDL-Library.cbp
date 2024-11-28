@@ -46,6 +46,7 @@
 			<Add directory="D:/cpp/SDL2_ttf-2.22.0/i686-w64-mingw32/lib" />
 		</Linker>
 		<Unit filename="include/ErrorTracker.h" />
+		<Unit filename="include/Font.h" />
 		<Unit filename="include/Init.h" />
 		<Unit filename="include/Renderer.h" />
 		<Unit filename="include/Surface.h" />
@@ -53,6 +54,7 @@
 		<Unit filename="include/Window.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/ErrorTracker.cpp" />
+		<Unit filename="src/Font.cpp" />
 		<Unit filename="src/Init.cpp" />
 		<Unit filename="src/Renderer.cpp" />
 		<Unit filename="src/Surface.cpp" />

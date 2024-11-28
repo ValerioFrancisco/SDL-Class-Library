@@ -1,5 +1,6 @@
 #ifndef SURFACE_H
 #define SURFACE_H
+#include <SDL_ttf.h>
 #include <ErrorTracker.h>
 namespace lp {
 
@@ -22,6 +23,11 @@ namespace lp {
 			virtual void LoadBMP(const char *file);
 			// Loads an SDL_image image type
 			virtual void LoadImage(const char *file);
+
+			// Loads a solid Font
+			// TODO: add more font related rendering methods
+			virtual void LoadSolidFont(TTF_Font *font, const char *text, 
+									   SDL_Color color);
 
 			// Optimizes surface to the desired format
 			// deallocates the old surface after

@@ -25,6 +25,10 @@ namespace lp {
 			virtual void FromFileColorKey(const char *file, Renderer &ren,
 						Uint8 r = 0xFF, Uint8 g = 0xFF, Uint8 b = 0xFF);
 
+			// Creates text texture
+			virtual void FromSolidFont(Font &font, const char *text, 
+									   SDL_Color color, Renderer &ren);
+
 			// Sets the texture color modulation
 			virtual void SetColorMod(Uint8 r, Uint8 g, Uint8 b);
 

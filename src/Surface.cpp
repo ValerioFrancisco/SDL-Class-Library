@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <ErrorTracker.h>
 #include <Surface.h>
 namespace lp {
@@ -42,6 +43,14 @@ namespace lp {
 		else {
 			error.Set(false, "");
 		}
+	}
+
+	void Surface::LoadSolidFont(TTF_Font *font, const char *text, 
+								SDL_Color color) {
+		if(!error()) Close();
+		surf = TTF_RenderText_Solid(font, text, color);
+		if(surf == NULL) error.Set(true, TTF_GetError());
+		else error.Set(false, "");
 	}
 
 	void Surface::Close() {

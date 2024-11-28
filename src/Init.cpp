@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
+#include <SDL_ttf.h>
 #include <ErrorTracker.h>
 #include <Init.h>
 namespace lp {
@@ -30,6 +31,14 @@ namespace lp {
 		if(!error()) {
 			if(!(IMG_Init(flags) & flags)) {
 				error.Set(true, IMG_GetError());
+			}
+		}
+	}
+
+	void Init::InitFont() {
+		if(!error()) {
+			if(TTF_Init() == -1) {
+				error.Set(true, TTF_GetError());
 			}
 		}
 	}

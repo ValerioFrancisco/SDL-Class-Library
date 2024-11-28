@@ -1,10 +1,10 @@
 #ifndef FONT_H
 #define FONT_H
 #include <ErrorTracker.h>
-
+#include <SDL_ttf.h>
 namespace lp {
 
-	class Font() {
+	class Font {
 		public:
 			Font();
 			virtual ~Font();

@@ -27,6 +27,9 @@ namespace lp {
 			// IMG_INIT_TIF
 			virtual void InitImage(int flags);
 
+			// Initialize Fonts
+			virtual void InitFont();
+
 			// Closes SDL subsystems
 			virtual void Close();
 

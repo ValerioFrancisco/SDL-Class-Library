@@ -1,7 +1,9 @@
 #include <iostream>
+#include <string>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <Init.h>
+#include <Font.h>
 #include <Renderer.h>
 #include <Window.h>
 #include <Surface.h>
@@ -22,10 +24,11 @@ bool Test03();
 bool Test04();
 bool Test05();
 bool Test06();
+bool Test07();
 
 int main(int argc, char *argv[])
 {
-    return Test05();
+    return Test07();
 }
 
 
@@ -234,6 +237,60 @@ bool Test06() {
 		ren.FillRect(rect2);
 		ren.ResetViewport();
 		ren.Present();
+	}
+	return res;
+
+}
+
+bool Test07() {
+	bool res = false;
+	Init init;
+	init.InitFont();
+	Window win("Testing Fonts", SCR_WIDTH, SCR_HEIGHT);
+	Renderer ren;
+	ren.Create(win);
+	Font font;
+	font.Create("media/CupiddeLocke.ttf", 48);
+	SDL_Color color = { 255, 255, 0 };
+	Texture txtr;
+	int number = 0;
+	string str;
+	SDL_Event e;
+	bool quit = false;
+	while(!quit && !res) {
+		while(SDL_PollEvent(&e)){
+			if(e.type == SDL_QUIT) quit = true;
+			else {
+				if(e.type == SDL_KEYDOWN) {
+					switch(e.key.keysym.sym) {
+						case SDLK_UP:
+							number++;
+							break;
+						case SDLK_DOWN:
+							number--;
+							break;
+						default:
+							break;
+					}
+				}
+			}
+		}
+		str = to_string(number);
+		txtr.FromSolidFont(font, str.c_str(), color, ren);
+		ren.Clear();
+		SDL_Rect rect;
+		rect.x = SCR_WIDTH / 2 - txtr.GetWidth() / 2;
+		rect.y = SCR_HEIGHT / 2 - txtr.GetHeight() / 2;
+		rect.w = txtr.GetWidth();
+		rect.h = txtr.GetHeight();
+		ren.CopyEx(txtr.GetTexture(),NULL, &rect, 0.0);
+		if(ren.Error()) {
+			std::cout << "Copy: " << ren.ErrorMsg() << endl;
+			res = true;
+		}
+		else {
+			ren.Present();
+		}
 	}
 	return res;
 
