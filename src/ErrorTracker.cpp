@@ -14,7 +14,6 @@ namespace lp {
 	bool ErrorTracker::operator()()const { return error; }
 
 	const char *ErrorTracker::Message()const {
-	    if(!error) error_msg = "No error occurred... yet!"
 	    return error_msg.c_str();
     }
 
