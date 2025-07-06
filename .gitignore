@@ -33,3 +33,4 @@ include/.Renderer.h.swp
 *.o
 *.dll
 /bin/Debug/media
+*.dia~

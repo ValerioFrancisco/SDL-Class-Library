@@ -10,9 +10,16 @@ namespace lp {
 			Texture();
 			virtual ~Texture();
 
+            // Gets a pointer to the texture
 			virtual SDL_Texture *GetTexture()const;
+
+			// Gets Error status
 			virtual bool Error()const;
+
+			// Gets error message if present
 			virtual const char *ErrorMsg()const;
+
+			// Gets width and height of Texture
 			virtual int GetWidth()const;
 			virtual int GetHeight()const;
 
@@ -22,11 +29,13 @@ namespace lp {
 			// Loads directly from a file, discarding the surface
 			virtual void FromFile(const char *file, Renderer& ren);
 
+            // Loads from file directly, with a color defined as the
+            // transparent.
 			virtual void FromFileColorKey(const char *file, Renderer &ren,
 						Uint8 r = 0xFF, Uint8 g = 0xFF, Uint8 b = 0xFF);
 
 			// Creates text texture
-			virtual void FromSolidFont(Font &font, const char *text, 
+			virtual void FromSolidFont(Font &font, const char *text,
 									   SDL_Color color, Renderer &ren);
 
 			// Sets the texture color modulation

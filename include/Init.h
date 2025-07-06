@@ -12,7 +12,19 @@ namespace lp {
 			// Initializes video only
 			Init();
 
-			// Initializes according to the flags passed
+			// Initializes according to the flags passed, these are:
+			// SDL_INIT_TIMER: timer subsystem
+			// SDL_INIT_AUDIO: audio subsystem
+			// SDL_INIT_VIDEO: video subsystem; automatically initializes the
+			// events subsystem
+			// SDL_INIT_JOYSTICK: joystick subsystem; automatically initializes
+			// the events subsystem
+			// SDL_INIT_HAPTIC: haptic (force feedback) subsystem
+			// SDL_INIT_GAMECONTROLLER: controller subsystem; automatically
+			// initializes the joystick subsystem
+			// SDL_INIT_EVENTS: events subsystem
+			// SDL_INIT_EVERYTHING: all of the above subsystems
+			// SDL_INIT_NOPARACHUTE: compatibility; this flag is ignored
 			Init(Uint32 flags);
 
 			// Does all the cleanup
@@ -49,6 +61,7 @@ namespace lp {
 			// Becomes true if there is an error in initialization
 			ErrorTracker error;
 
+			// disallows copy constructor
 			Init(const Init &other);
 	};
 

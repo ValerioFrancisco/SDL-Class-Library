@@ -7,7 +7,8 @@ namespace lp {
 	// Wraps an SDL window and takes care of its destruction
 	class Window {
 		public:
-			// Default constructor, ATTN: does not create the window
+			// Default constructor, ATTN: does not create the window,
+			// use the Create() method in order to do so.
 			Window();
 
 			// Creates the window
