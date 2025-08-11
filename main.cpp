@@ -32,7 +32,7 @@ bool Test08();
 
 int main(int argc, char *argv[])
 {
-    return Test08();
+    return Test06();
 }
 
 
@@ -222,7 +222,6 @@ bool Test06() {
 		ren.Clear();
 		ren.SetDrawColor(0x00, 0x00, 0x00);
 		ren.DrawPoint(SCR_WIDTH / 2, SCR_HEIGHT / 2);
-		ren.DrawLine(0, 40, SCR_WIDTH, 40);
 		SDL_Rect rect;
 		rect.x = 50;
 		rect.y = 50;
@@ -230,10 +229,10 @@ bool Test06() {
 		rect.h = 20;
 		ren.DrawRect(rect);
 		SDL_Rect rect2;
-		rect2.x = 20;
-		rect2.y = 20;
-		rect2.w = 20;
-		rect2.h = 20;
+		rect2.x = 25;
+		rect2.y = 25;
+		rect2.w = 50;
+		rect2.h = 50;
 		ren.SetViewport(vp);
 		ren.SetDrawColor(0x00, 0x00, 0x00);
 		ren.FillRect(vpsize);
