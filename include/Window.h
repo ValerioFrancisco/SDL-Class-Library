@@ -15,9 +15,7 @@ namespace lp {
 			Window(const char *title,
 				   int width,
 				   int height,
-				   int xposition = SDL_WINDOWPOS_UNDEFINED,
-				   int yposition = SDL_WINDOWPOS_UNDEFINED,
-				   Uint32 flags = SDL_WINDOW_SHOWN);
+				   SDL_WindowFlags flags = 0);
 
 			// Cleans up pointers
 			virtual ~Window();
@@ -35,9 +33,7 @@ namespace lp {
 			virtual void Create(const char *title,
 								int width,
 								int height,
-								int xposition = SDL_WINDOWPOS_UNDEFINED,
-								int yposition = SDL_WINDOWPOS_UNDEFINED,
-								Uint32 flags = SDL_WINDOW_SHOWN);
+								SDL_WindowFlags flags = 0);
 
 			// frees the window memory
 			virtual void Close();

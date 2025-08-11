@@ -34,3 +34,4 @@ include/.Renderer.h.swp
 *.dll
 /bin/Debug/media
 *.dia~
+.vscode/c_cpp_properties.json

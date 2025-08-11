@@ -43,10 +43,7 @@ namespace lp {
 			virtual void InitFont();
 
 			// Initialize SDL_mixer for sound.
-			void InitMixer(int frequency = 44100, 
-						   Uint32 format = MIX_DEFAULT_FORMAT,
-						   int channels = 2,
-						   int chunksize = 2048);
+			void InitMixer();
 
 			// Closes SDL subsystems
 			virtual void Close();

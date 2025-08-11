@@ -3,6 +3,7 @@
 #include <SDL_ttf.h>
 #include <ErrorTracker.h>
 #include <Surface.h>
+#include <Font.h>
 namespace lp {
 
 	Surface::Surface(): surf(NULL), error(ErrorTracker()) {}
@@ -38,24 +39,24 @@ namespace lp {
 		if(!error()) Close();
 		surf = IMG_Load(file);
 		if(surf == NULL) {
-			error.Set(true, IMG_GetError());
+			error.Set(true, SDL_GetError());
 		}
 		else {
 			error.Set(false, "");
 		}
 	}
 
-	void Surface::LoadSolidFont(TTF_Font *font, const char *text, 
-								SDL_Color color) {
+	void Surface::LoadSolidFont(Font &font, const char *text, 
+								SDL_Color color, size_t length) {
 		if(!error()) Close();
-		surf = TTF_RenderText_Solid(font, text, color);
-		if(surf == NULL) error.Set(true, TTF_GetError());
+		surf = TTF_RenderText_Solid(font.GetFont(), text, length, color);
+		if(surf == NULL) error.Set(true, SDL_GetError());
 		else error.Set(false, "");
 	}
 
 	void Surface::Close() {
 		if(surf != NULL) {
-			SDL_FreeSurface(surf);
+			SDL_DestroySurface(surf);
 			surf = NULL;
 			error.Set(true, "Not initialized");
 		}
@@ -64,50 +65,53 @@ namespace lp {
 	
 	void Surface::SetColorKey(Uint8 r, Uint8 g, Uint8 b) {
 		if(!error()) {
-			if(SDL_SetColorKey(surf, SDL_TRUE, 
-							   SDL_MapRGB(surf->format, r, g, b)) < 0) {
+			if(!SDL_SetSurfaceColorKey(surf, true, 
+							   SDL_MapSurfaceRGB(surf, r, g, b))) {
 				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 
-	void Surface::Blit(SDL_Rect *src_rect, SDL_Surface *dest,
+	void Surface::Blit(SDL_Rect *src_rect, Surface &dest,
 					   SDL_Rect *dest_rect) {
 		if(!error()) {
-			if(SDL_BlitSurface(surf, src_rect, dest, dest_rect) < 0) {
+			if(!SDL_BlitSurface(surf, src_rect, dest.GetSurface(), dest_rect)) {
 				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 
-	void Surface::BlitFull(SDL_Surface *dest, SDL_Rect *dest_rect) {
+	void Surface::BlitFull(Surface &dest, SDL_Rect *dest_rect) {
 		if(!error()) {
-			if(SDL_BlitSurface(surf, NULL, dest, dest_rect) < 0) {
+			if(!SDL_BlitSurface(surf, NULL, dest.GetSurface(), dest_rect)) {
 				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 
-	void Surface::BlitScaled(SDL_Rect *src_rect, SDL_Surface *dest,
-							 SDL_Rect *dest_rect) {
+	void Surface::BlitScaled(SDL_Rect *src_rect, Surface &dest,
+							 SDL_Rect *dest_rect, SDL_ScaleMode mode) {
 		if(!error()) {
-			if(SDL_BlitScaled(surf, src_rect, dest, dest_rect) < 0) {
+			if(!SDL_BlitSurfaceScaled(surf, src_rect, dest.GetSurface(),
+									  dest_rect, mode)) {
 				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 
-	void Surface::BlitScaledFull(SDL_Surface *dest, SDL_Rect *dest_rect) {
+	void Surface::BlitScaledFull(Surface &dest, SDL_Rect *dest_rect,
+								 SDL_ScaleMode mode) {
 		if(!error()) {
-			if(SDL_BlitScaled(surf, NULL, dest, dest_rect) < 0) {
+			if(!SDL_BlitSurfaceScaled(surf, NULL, dest.GetSurface(),
+									  dest_rect, mode)) {
 				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 
-	void Surface::Optimize(SDL_PixelFormat *format, Uint32 flags) {
+	void Surface::Optimize(SDL_PixelFormat format) {
 		if(!error()) { 
-			SDL_Surface *aux = SDL_ConvertSurface(surf, format, flags);
+			SDL_Surface *aux = SDL_ConvertSurface(surf, format);
 			if(aux == NULL) {
 				error.Set(true, SDL_GetError());
 			}

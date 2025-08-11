@@ -5,6 +5,8 @@
 
 namespace lp {
 
+	// Forward declaration
+	class Texture;
 	// Encapsulates SDL_Renderer operations
 	class Renderer {
 		public:
@@ -25,8 +27,7 @@ namespace lp {
 			// SDL_RENDERER_PRESENTVSYNC
 			// SDL_RENDERER_TARGETTEXTURE
 			virtual void Create(Window &win,
-							    int index = -1,
-								Uint32 flags = SDL_RENDERER_ACCELERATED);
+							    const char *name = NULL);
 
 
 			// Sets the primary draw color with RGB plus alpha channel
@@ -35,8 +36,8 @@ namespace lp {
 
 			// Copies the rect from src to destination on renderer surface
 			// NULL copies the whole texture to the whole destination
-			virtual void Copy(SDL_Texture *texture, const SDL_Rect *src= NULL,
-					  const SDL_Rect *dest = NULL);
+			virtual void Copy(const Texture &texture, const SDL_FRect *src= NULL,
+					  const SDL_FRect *dest = NULL);
 
 			// Same as above, but with extra parameters, angle of rotation
 			// around a center point (NULL for center of texture) and flip
@@ -44,21 +45,21 @@ namespace lp {
 			// SDL_FLIP_NONE
 			// SDL_FLIP_HORIZONTAL
 			// SDL_FLIP_VERTICAL
-			virtual void CopyEx(SDL_Texture *txtr,
-								const SDL_Rect *src,
-								const SDL_Rect *dest,
+			virtual void CopyRotated(const Texture &txtr,
+								const SDL_FRect *src,
+								const SDL_FRect *dest,
 								const double angle,
-								const SDL_Point *center = NULL,
-								const SDL_RendererFlip flip = SDL_FLIP_NONE);
+								const SDL_FPoint *center = NULL,
+								const SDL_FlipMode flip = SDL_FLIP_NONE);
 
 			// Renders a point
-			virtual void DrawPoint(int x, int y);
+			virtual void DrawPoint(float x, float y);
 			// Draws a line
-			virtual void DrawLine(int x1, int y1, int x2, int y2);
+			virtual void DrawLine(float x1, float y1, float x2, float y2);
 			// Draws a Rectangle
-			virtual void DrawRect(const SDL_Rect &rect);
+			virtual void DrawRect(const SDL_FRect &rect);
 			// Draws a filled rectangle
-			virtual void FillRect(const SDL_Rect &rect);
+			virtual void FillRect(const SDL_FRect &rect);
 
             // Sets the rendering viewport to the specified rectangle
 			virtual void SetViewport(const SDL_Rect& vp);

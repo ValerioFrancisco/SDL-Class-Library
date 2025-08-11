@@ -4,6 +4,9 @@
 #include <ErrorTracker.h>
 namespace lp {
 
+	// Forward declaration;
+	class Font;
+
 	// Encapsulates SDL surfaces and related operations
 	// takes care of memory management
 	// requires SDL.h
@@ -29,30 +32,33 @@ namespace lp {
 
 			// Loads a solid Font
 			// TODO: add more font related rendering methods
-			virtual void LoadSolidFont(TTF_Font *font, const char *text,
-									   SDL_Color color);
+			virtual void LoadSolidFont(Font &font, const char *text,
+									   SDL_Color color, size_t length = 0);
 
 			// Optimizes surface to the desired format
 			// deallocates the old surface after
-			virtual void Optimize(SDL_PixelFormat *format,
-								  Uint32 flags = 0);
+			virtual void Optimize(SDL_PixelFormat format);
+
 			// Sets the transparent pixel
 			virtual void SetColorKey(Uint8 r, Uint8 g, Uint8 b);
 
 			// Blits the source rectangle fom this surface to the
 			// destination surface rectangle
-			virtual void Blit(SDL_Rect *src_rect, SDL_Surface  *dest,
+			virtual void Blit(SDL_Rect *src_rect, Surface  &dest,
 							  SDL_Rect *dest_rect = NULL);
 
 			// Blits the full loaded Surface
-			virtual void BlitFull(SDL_Surface *dest,
+			virtual void BlitFull(Surface &dest,
 								  SDL_Rect *dest_rect = NULL);
 
 			// Blits a scaled optimized Surface
-			virtual void BlitScaled(SDL_Rect * src_rect, SDL_Surface *dest,
-									SDL_Rect *dest_rect = NULL);
-			virtual void BlitScaledFull(SDL_Surface *dest,
-										SDL_Rect *dest_rect);
+			virtual void BlitScaled(SDL_Rect * src_rect, Surface &dest,
+									SDL_Rect *dest_rect = NULL,
+									SDL_ScaleMode mode = SDL_SCALEMODE_PIXELART);
+
+			virtual void BlitScaledFull(Surface &dest,
+										SDL_Rect *dest_rect,
+										SDL_ScaleMode mode = SDL_SCALEMODE_PIXELART);
 
 			// Frees memory if allocated
 			virtual void Close();

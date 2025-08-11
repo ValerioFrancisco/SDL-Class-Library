@@ -1,7 +1,7 @@
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-#include <SDL_mixer.h>
+#include <SDL3/SDL.h>
+#include <SDL3_image/SDL_image.h>
+#include <SDL3_ttf/SDL_ttf.h>
+#include <SDL3_mixer/SDL_mixer.h>
 #include <ErrorTracker.h>
 #include <Init.h>
 namespace lp {
@@ -20,7 +20,7 @@ namespace lp {
 	}
 
 	void Init::Initialize(Uint32 flags) {
-		if(SDL_Init(flags) < 0) {
+		if(!SDL_Init(flags) ) {
 			error.Set(true, SDL_GetError());
 		}
 		else {
@@ -28,33 +28,25 @@ namespace lp {
 		}
 	}
 
-	void Init::InitImage(int flags) {
-		if(!error()) {
-			if(!(IMG_Init(flags) & flags)) {
-				error.Set(true, IMG_GetError());
-			}
-		}
-	}
-
 	void Init::InitFont() {
 		if(!error()) {
-			if(TTF_Init() == -1) {
-				error.Set(true, TTF_GetError());
+			if(!TTF_Init()) {
+				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 
-	void Init::InitMixer(int frequency, Uint32 format, int channels,
-						 int chunksize) {
+	void Init::InitMixer() {
 		if(!error()) {
-			if(Mix_OpenAudio(frequency, format, channels, chunksize) < 0) {
-				error.Set(true, Mix_GetError());
+			if(!MIX_Init()) {
+				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 
 	void Init::Close() {
-		IMG_Quit();
+		MIX_Quit();
+		TTF_Quit();
 		SDL_Quit();
 		error.Set(true, "Not initialized");
 	}

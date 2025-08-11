@@ -3,7 +3,7 @@
 #include <ErrorTracker.h>
 #include <Window.h>
 #include <Renderer.h>
-
+#include <Texture.h>
 namespace lp {
 
 	Renderer::Renderer(): ren(NULL), error(ErrorTracker()) {}
@@ -16,67 +16,68 @@ namespace lp {
 
 	const char *Renderer::ErrorMsg()const { return error.Message(); }
 
-	void Renderer::Create(Window &win, int index, Uint32 flags) {
+	void Renderer::Create(Window &win, const char *name) {
 		if(!error()) { Close(); }
-		ren = SDL_CreateRenderer(win.GetWindow(), index, flags);
+		ren = SDL_CreateRenderer(win.GetWindow(), name);
 		if(ren == NULL) error.Set(true, SDL_GetError());
 		else error.Set(false, "");
 	}
 
 	void Renderer::SetDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
 		if(!error()) {
-			if(SDL_SetRenderDrawColor(ren, r, g, b, a) < 0) {
+			if(!SDL_SetRenderDrawColor(ren, r, g, b, a)) {
 				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 
-	void Renderer::Copy( SDL_Texture *texture, const SDL_Rect *src,
-						 const SDL_Rect *dest) {
+	void Renderer::Copy(const Texture &texture, const SDL_FRect *src,
+						 const SDL_FRect *dest) {
 		if(!error()) {
-			if(SDL_RenderCopy(ren, texture, src, dest) < 0) {
+			if(!SDL_RenderTexture(ren, texture.GetTexture(), src, dest)) {
 				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 
-	void Renderer::CopyEx(SDL_Texture *txtr, 
-						  const SDL_Rect *src,
-						  const SDL_Rect *dest,
+	void Renderer::CopyRotated(const Texture &txtr, 
+						  const SDL_FRect *src,
+						  const SDL_FRect *dest,
 						  const double angle,
-						  const SDL_Point *center,
-						  const SDL_RendererFlip flip) {
+						  const SDL_FPoint *center,
+						  const SDL_FlipMode flip) {
 		if(!error()) {
-			if(SDL_RenderCopyEx(ren, txtr, src, dest, angle, center, flip)<0) {
+			if(!SDL_RenderTextureRotated(ren, txtr.GetTexture(),
+										 src, dest, angle, center, flip)) {
 				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 
-	void Renderer::DrawPoint(int x, int y) {
+	void Renderer::DrawPoint(float x, float y) {
 		if(!error()) {
-			if(SDL_RenderDrawPoint(ren, x,y) < 0) {
+			if(!SDL_RenderPoint(ren, x,y)) {
 				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 	
-	void Renderer::DrawLine(int x1, int y1, int x2, int y2) {
+	void Renderer::DrawLine(float x1, float y1, float x2, float y2) {
 		if(!error()) {
-			if(SDL_RenderDrawLine(ren, x1, y1, x2, y2) < 0) {
+			if(!SDL_RenderLine(ren, x1, y1, x2, y2)) {
 				error.Set(true, SDL_GetError());
 			}
 		}
 	}	
-	void Renderer::DrawRect(const SDL_Rect &rect) {
+	void Renderer::DrawRect(const SDL_FRect &rect) {
 		if(!error()) {
-			if(SDL_RenderDrawRect(ren, &rect) < 0) {
+			if(SDL_RenderRect(ren, &rect) < 0) {
 				error.Set(true, SDL_GetError());
 			}
 		}
 	}
 
-	void Renderer::FillRect(const SDL_Rect &rect) {
+	void Renderer::FillRect(const SDL_FRect &rect) {
 		if(!error()) {
 			if(SDL_RenderFillRect(ren, &rect) < 0) {
 				error.Set(true, SDL_GetError());
@@ -86,7 +87,7 @@ namespace lp {
 
 	void Renderer::SetViewport(const SDL_Rect &vp) {
 		if(!error()) {
-			if(SDL_RenderSetViewport(ren, &vp) < 0) {
+			if(SDL_SetRenderViewport(ren, &vp) < 0) {
 				error.Set(true, SDL_GetError());
 			}
 		}
@@ -94,7 +95,7 @@ namespace lp {
 
 	void Renderer::ResetViewport() {
 		if(!error()) {
-			if(SDL_RenderSetViewport(ren, NULL) < 0) {
+			if(SDL_SetRenderViewport(ren, NULL) < 0) {
 				error.Set(true, SDL_GetError());
 			}
 		}
@@ -102,7 +103,7 @@ namespace lp {
 
 	SDL_Rect Renderer::GetViewport()const {
 		SDL_Rect res;
-		SDL_RenderGetViewport(ren, &res);
+		SDL_GetRenderViewport(ren, &res);
 		return res;
 	}
 

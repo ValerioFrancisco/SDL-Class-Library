@@ -1,4 +1,4 @@
-#include <SDL.h>
+#include <SDL3/SDL.h>
 #include <Window.h>
 #include <ErrorTracker.h>
 namespace lp {
@@ -8,11 +8,9 @@ namespace lp {
 	Window::Window(const char *title,
 				   int width,
 				   int height,
-				   int xposition,
-				   int yposition,
-				   Uint32 flags): win(NULL),
+				   SDL_WindowFlags flags): win(NULL),
 							      error(ErrorTracker()){
-		Create(title, width, height, xposition, yposition, flags);
+		Create(title, width, height, flags);
 	}
 
 	Window::~Window() {
@@ -50,12 +48,9 @@ namespace lp {
 	void Window::Create(const char *title,
 				   		int width,
 						int height,
-						int xposition,
-						int yposition,
-						Uint32 flags) {
+						SDL_WindowFlags flags) {
 		if(!error() || win != NULL) Close();
-		win = SDL_CreateWindow(title, xposition, yposition,
-						    width, height, flags);
+		win = SDL_CreateWindow(title, width, height, flags);
 		if(win == NULL) error.Set(true, SDL_GetError());
 		else error.Set(false, "");
 	}
