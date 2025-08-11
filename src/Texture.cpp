@@ -70,7 +70,7 @@ namespace lp {
 								Renderer &ren){
 		Close();
 		Surface surf;
-		surf.LoadSolidFont(font.GetFont(), text, color);
+		surf.LoadSolidFont(font, text, color);
 		if(surf.Error()) error.Set(true, surf.ErrorMsg());
 		else {
 			width = surf.GetSurface()->w;
